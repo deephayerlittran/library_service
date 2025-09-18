@@ -4,7 +4,12 @@ import * as bookService from "../services/bookService";
 
 export const getAllBooks = (req: Request, res: Response): void => {
     try {
-        const books = bookService.getAllBooks();
+        const { title, author, genre } = req.query;
+        const books = bookService.getAllBooks(
+            title as string,
+            author as string,
+            genre as string
+        );
         res.status(HTTP_STATUS.OK).json({
             message: "Books retrieved",
             data: books,
