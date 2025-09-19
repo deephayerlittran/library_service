@@ -4,12 +4,7 @@ import * as bookService from "../services/bookService";
 
 export const getAllBooks = (req: Request, res: Response): void => {
     try {
-        const { title, author, genre } = req.query;
-        const books = bookService.getAllBooks(
-            title as string,
-            author as string,
-            genre as string
-        );
+        const books = bookService.getAllBooks();
         res.status(HTTP_STATUS.OK).json({
             message: "Books retrieved",
             data: books,
@@ -112,35 +107,6 @@ export const returnBook = (req: Request, res: Response): void => {
     } catch (error) {
         res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
             message: "Error returning book",
-        });
-    }
-};
-
-export const getBookById = (req: Request, res: Response): void => {
-    try {
-        const { id } = req.params;
-        
-        if (!id) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message: "Book ID is required",
-            });
-            return;
-        }
-
-        const book = bookService.getBookById(id);
-        if (book) {
-            res.status(HTTP_STATUS.OK).json({
-                message: "Book retrieved",
-                data: book,
-            });
-        } else {
-            res.status(HTTP_STATUS.NOT_FOUND).json({
-                message: "Book not found",
-            });
-        }
-    } catch (error) {
-        res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-            message: "Error retrieving book",
         });
     }
 };

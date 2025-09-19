@@ -24,28 +24,8 @@ const books: Book[] = [
     },
 ];
 
-export const getAllBooks = (title?: string, author?: string, genre?: string): Book[] => {
-    let filteredBooks = books;
-
-    if (title) {
-        filteredBooks = filteredBooks.filter(book =>
-            book.title.toLowerCase().includes(title.toLowerCase())
-        );
-    }
-
-    if (author) {
-        filteredBooks = filteredBooks.filter(book =>
-            book.author.toLowerCase().includes(author.toLowerCase())
-        );
-    }
-
-    if (genre) {
-        filteredBooks = filteredBooks.filter(book =>
-            book.genre.toLowerCase() === genre.toLowerCase()
-        );
-    }
-
-    return structuredClone(filteredBooks);
+export const getAllBooks = (): Book[] => {
+    return structuredClone(books);
 };
 
 /**
